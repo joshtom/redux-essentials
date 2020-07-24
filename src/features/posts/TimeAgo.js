@@ -6,12 +6,12 @@ export const TimeAgo = ({ timestamp }) => {
     if (TimeAgo) {
         const date = parseISO(timestamp);
         const timePeriod = formatDistanceToNow(date);
-        timeAgo = `${timePeriod} ago`
+        TimeAgo = `${timePeriod} ago`
     }
 
     return (
         <span title={timestamp}>
-            &nbsp; <i>{timeAgo}</i>
+            &nbsp; <i>{TimeAgo}</i>
         </span>
     )
 }
