@@ -9,9 +9,9 @@ export const PostsList = () => {
     const posts = useSelector(state => state.posts);
 
     // Sort posts in reverse chronological order by datetime string
-    const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+    // const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
-const renderedPosts = orderedPosts.map(post => {
+const renderedPosts = posts.map(post => {
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
