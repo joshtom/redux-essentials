@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
+import { PostAuthor } from './PostAuthor'
 
 export const SinglePostPage = ({ match }) => {
     const { postId } = match.params
@@ -7,6 +9,8 @@ export const SinglePostPage = ({ match }) => {
     const post = useSelector(state => 
         state.posts.find(post => post.id === postId)
         )
+
+        console.log('is post exist',post)
 
     if(!post) {
         return(
@@ -21,7 +25,12 @@ export const SinglePostPage = ({ match }) => {
             <article className="post">
                 <h2> {post.title} </h2>
                 <p className="post-content">{post.content}</p>
+                <Link to={`/editPost/${post.id}`} className="button">
+                    Edit Post
+                </Link>
+                <PostAuthor userId={post.user} />
             </article>
+            
         </section>
     )
 }

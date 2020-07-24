@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = [
     { id: '1', title: 'First Post!', content: 'Hello!' },
@@ -9,8 +9,28 @@ const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {
-        postAdded(state, action) {
-            state.push(action.payload)
+        reactionAdded(state, action){
+            const { postId, reaction } = action.payload
+            const existingPost = state.find(post => post.id === postId)
+            if(existingPost) {
+                existingPost.reactions[reaction]++
+            }
+        },
+        postAdded: {
+            reducer(state, action) {
+                state.push(action.payload)
+            },
+            prepare(title, content, userId) {
+                return {
+                    payload: {
+                        id: nanoid(),
+                        date: new Date().toISOString(), // Don't put class instances, functions, or other non-serializable values into Redux!. That's why the date instance was converted to string
+                        title, 
+                        content,
+                        user: userId
+                    }
+                }
+            }
         },
         postUpdated(state, action) {
             const { id, title, content } = action.payload;
@@ -24,4 +44,4 @@ const postsSlice = createSlice({
 })
 
 export default postsSlice.reducer
-export const { postAdded, postUpdated } = postsSlice.actions
+export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
