@@ -15,7 +15,9 @@ export const PostsList = () => {
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date))
 
-const renderedPosts = orderedPosts.map(post => {
+    console.log('This is the ordered post',orderedPosts)
+
+const renderedPosts = orderedPosts.map((post) => {
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>

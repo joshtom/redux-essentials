@@ -38,7 +38,7 @@ const postsSlice = createSlice({
     reducers: {
         reactionAdded(state, action){
             const { postId, reaction } = action.payload
-            const existingPost = state.find(post => post.id === postId)
+            const existingPost = state.find((post) => post.id === postId)
             if(existingPost) {
                 existingPost.reactions[reaction]++
             }
@@ -54,10 +54,17 @@ const postsSlice = createSlice({
                         date: new Date().toISOString(), // Don't put class instances, functions, or other non-serializable values into Redux!. That's why the date instance was converted to string
                         title, 
                         content,
-                        user: userId
-                    }
+                        user: userId,
+                        reactions: {
+                            thumbsUp: 0,
+                            hooray: 0,
+                            heart: 0,
+                            rocket: 0,
+                            eyes: 0,
+                        },
+                    },
                 }
-            }
+            },
         },
         postUpdated(state, action) {
             const { id, title, content } = action.payload;
@@ -72,6 +79,8 @@ const postsSlice = createSlice({
 
 export default postsSlice.reducer
 export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
+
+
 
 
 
