@@ -24,7 +24,7 @@ export const AddPostForm = () => {
     }
   }
 
-  const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId) // To control the button disabled state
 
   const usersOptions = users.map(user => (
     <option key={user.id} value={user.id}>
